@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	message, err := greetings.Hello("")
+	message, err := greetings.Hello("Khiangte")
 
 	if err != nil {
 		log.SetPrefix("Greetings: ")
