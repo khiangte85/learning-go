@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"os"
 )
 
 func main() {
@@ -26,11 +25,4 @@ func main() {
 	fmt.Printf("Profit Ratio: %.2f\n", ratio)
 
 	storeProfit(ebt, profit, ratio)
-
-}
-
-func storeProfit(ebt, profit, ratio float64) {
-	results := fmt.Sprintf("EBT: %.2f\nProfit: %.2f\nRatio: %.2f", ebt, profit, ratio)
-
-	os.WriteFile("profit", []byte(results), 0644);
 }
