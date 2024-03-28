@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
 func main() {
 	var revenue float64
@@ -22,4 +25,12 @@ func main() {
 	fmt.Printf("Profit: %.2f\n", profit)
 	fmt.Printf("Profit Ratio: %.2f\n", ratio)
 
+	storeProfit(ebt, profit, ratio)
+
+}
+
+func storeProfit(ebt, profit, ratio float64) {
+	results := fmt.Sprintf("EBT: %.2f\nProfit: %.2f\nRatio: %.2f", ebt, profit, ratio)
+
+	os.WriteFile("profit", []byte(results), 0644);
 }
