@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"khiangte/profit_calculator/utils"
 )
 
 func main() {
@@ -9,8 +10,16 @@ func main() {
 	var expenses float64
 	var taxRate float64
 
+	fmt.Println(utils.GetProfit())
+	fmt.Println("--------------")
+
 	fmt.Print("Revenue: ")
-	fmt.Scan(&revenue)
+	_, err := fmt.Scan(&revenue)
+
+	if err != nil {
+		panic(err)
+	}
+	
 	fmt.Print("Expenses: ")
 	fmt.Scan(&expenses)
 	fmt.Print("Tax Rate: ")
@@ -20,9 +29,9 @@ func main() {
 	profit := ebt * (1 - taxRate/100)
 	ratio := ebt / profit
 
-	fmt.Printf("Earning before tax: %.2f\n", ebt)
+	fmt.Printf("\nEBT: %.2f\n", revenue)
 	fmt.Printf("Profit: %.2f\n", profit)
 	fmt.Printf("Profit Ratio: %.2f\n", ratio)
 
-	storeProfit(ebt, profit, ratio)
+	utils.StoreProfit(ebt, profit, ratio)
 }
