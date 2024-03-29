@@ -2,25 +2,19 @@ package main
 
 import (
 	"fmt"
-	"time"
+	"khiangte/struct/user"
 )
 
-type User struct {
-	firstName string
-	lastName  string
-	dob       string
-	createdAt time.Time
-}
-
 func main() {
-	// user  := User {
-	// 	firstName: "Lalmuanawma",
-	// 	lastName: "Khiangte",
-	// 	dob: "02.06.1985",
-	// 	createdAt: time.Now(),
-	// }
+	user, err := user.New("Lalmuanawma", "Khiangte", "02/6/1985")
 
-	user1 := User{}
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 
-	fmt.Printf("%#v", user1)
+	fmt.Printf("%#v\n", user)
+	user.ClearUsername()
+	fmt.Printf("%#v\n", user)
+
 }
