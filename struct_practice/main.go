@@ -5,9 +5,19 @@ import (
 	"errors"
 	"fmt"
 	"khiangte/struct-practice/note"
+	"khiangte/struct-practice/todo"
 	"os"
 	"strings"
 )
+
+type ISaver interface {
+	Save() error
+}
+
+type IOuputable interface {
+	ISaver
+	Display()
+}
 
 func main() {
 	title, content := getNoteData()
@@ -19,8 +29,26 @@ func main() {
 		return
 	}
 
-	userNote.Display()
-	userNote.Save()
+	output(userNote)
+
+	text, _ := getUserInput("Enter todo: ")
+
+	todo, _ := todo.New(text)
+
+	output(todo)
+}
+
+func output(data IOuputable) {
+	data.Display()
+	saveToFile(data)
+}
+
+func saveToFile(data ISaver) {
+	err := data.Save()
+
+	if err != nil {
+		fmt.Println("Failed to save data", err)
+	}
 }
 
 func getNoteData() (string, string) {
@@ -41,7 +69,7 @@ func getNoteData() (string, string) {
 
 func getUserInput(prompt string) (string, error) {
 	fmt.Print(prompt)
-	
+
 	reader := bufio.NewReader(os.Stdin)
 	value, err := reader.ReadString('\n')
 

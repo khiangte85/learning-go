@@ -35,20 +35,14 @@ func (note Note) Display() {
 	fmt.Printf("Title: %v\nContent: %v\n", note.Title, note.Content)
 }
 
-func (note Note) Save() {
+func (note Note) Save() error {
 	fileName := strings.ToLower(strings.ReplaceAll(note.Title, " ", "_")) + ".json"
 
 	json, err := json.Marshal(note)
 
 	if err != nil {
-		fmt.Println("Error convert to JSON", err)
-		return
+		return err
 	}
 
-	err = os.WriteFile(fileName, json, 0644)
-
-	if err != nil {
-		fmt.Println("Error writing file", err)
-		return
-	}
+	return os.WriteFile(fileName, json, 0644)
 }
