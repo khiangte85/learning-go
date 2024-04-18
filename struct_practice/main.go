@@ -20,6 +20,10 @@ type IOuputable interface {
 }
 
 func main() {
+	printAny(44)
+	printAny(1.5)
+	printAny("this prints any value")
+
 	title, content := getNoteData()
 
 	userNote, err := note.New(title, content)
@@ -49,6 +53,24 @@ func saveToFile(data ISaver) {
 	if err != nil {
 		fmt.Println("Failed to save data", err)
 	}
+}
+
+func printAny(value interface{}) {
+	typeVal, ok := value.(int)
+
+	if ok {
+		fmt.Println("This is integer", typeVal)
+	}
+
+	switch value.(type) {
+	case int:
+		fmt.Println("Integer: ", value)
+	case float32:
+		fmt.Println("float: ", value)
+	default:
+		fmt.Println(value)
+	}
+
 }
 
 func getNoteData() (string, string) {

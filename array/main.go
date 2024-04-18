@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+)
 
 func main(){
 	array := [5]int{2,4,5,6,7}
@@ -13,8 +16,7 @@ func main(){
 
 	fmt.Printf("%v\n", transportations[1])
 	
-	transportations = append(transportations, "Aeroplane")
-	transportations = append(transportations, "Jet")
+	transportations = append(transportations, "Aeroplane", "Jet")
 	transportations = append(transportations, "Rocket")
 
 	landTransportations :=  transportations[:2]
@@ -26,6 +28,10 @@ func main(){
 	fmt.Println(len(landTransportations), cap(landTransportations))
 	fmt.Println(airTransportations)
 	fmt.Println(len(airTransportations), cap(airTransportations))
+	
+	var all []string
+	all =  append( all, airTransportations...)
+	all =  append( all, landTransportations...)
+	fmt.Println(all)
 
-	practice()
 }
